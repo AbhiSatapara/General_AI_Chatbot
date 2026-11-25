@@ -16,8 +16,13 @@ except ImportError:
     traceable = None
 
 load_dotenv()
-GROQ_API_KEY = os.getenv("GROQ_API_KEY", "").strip()
-GROQ_MODEL = os.getenv("GROQ_MODEL", "openai/gpt-oss-120b").strip()
+GROQ_API_KEY = st.secrets.get(
+    "GROQ_API_KEY", os.getenv("GROQ_API_KEY", "")
+).strip()
+
+GROQ_MODEL = st.secrets.get(
+    "GROQ_MODEL", os.getenv("GROQ_MODEL", "openai/gpt-oss-120b")
+).strip()
 LANGSMITH_API_KEY = os.getenv("LANGSMITH_API_KEY", "").strip()
 LANGSMITH_PROJECT = os.getenv("LANGSMITH_PROJECT", "General-AI-Assistant").strip()
 LANGSMITH_TRACING = os.getenv("LANGSMITH_TRACING", "false").strip().lower() in {"true", "1", "yes"}
